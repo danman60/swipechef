@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/recipeDeckFragment"
+        android:icon="@drawable/ic_recipes"
+        android:title="@string/recipe_deck_title" />
+
+    <item
+        android:id="@+id/swipePlanningFragment"
+        android:icon="@drawable/ic_swipe"
+        android:title="@string/swipe_planning" />
+
+    <item
+        android:id="@+id/groceryListFragment"
+        android:icon="@drawable/ic_grocery"
+        android:title="@string/grocery_list" />
+
+</menu>

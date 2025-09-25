@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/recipeDeckFragment">
+
+    <fragment
+        android:id="@+id/recipeDeckFragment"
+        android:name="com.swipechef.app.ui.deck.RecipeDeckFragment"
+        android:label="@string/recipe_deck_title"
+        tools:layout="@layout/fragment_recipe_deck">
+
+        <action
+            android:id="@+id/action_deck_to_capture"
+            app:destination="@id/recipeCaptureFragment" />
+
+        <action
+            android:id="@+id/action_deck_to_detail"
+            app:destination="@id/recipeDetailFragment" />
+
+        <action
+            android:id="@+id/action_deck_to_swipe_planning"
+            app:destination="@id/swipePlanningFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recipeCaptureFragment"
+        android:name="com.swipechef.app.ui.capture.RecipeCaptureFragment"
+        android:label="@string/capture_recipe"
+        tools:layout="@layout/fragment_recipe_capture">
+
+        <argument
+            android:name="shared_image_uri"
+            app:argType="android.net.Uri"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_capture_to_deck"
+            app:destination="@id/recipeDeckFragment"
+            app:popUpTo="@id/recipeDeckFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/swipePlanningFragment"
+        android:name="com.swipechef.app.ui.swipe.SwipePlanningFragment"
+        android:label="@string/swipe_planning"
+        tools:layout="@layout/fragment_swipe_planning">
+
+        <action
+            android:id="@+id/action_swipe_to_grocery"
+            app:destination="@id/groceryListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="com.swipechef.app.ui.detail.RecipeDetailFragment"
+        android:label="@string/recipe_detail"
+        tools:layout="@layout/fragment_recipe_detail">
+
+        <argument
+            android:name="recipe_id"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_detail_to_capture"
+            app:destination="@id/recipeCaptureFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/groceryListFragment"
+        android:name="com.swipechef.app.ui.grocery.GroceryListFragment"
+        android:label="@string/grocery_list"
+        tools:layout="@layout/fragment_grocery_list">
+
+        <argument
+            android:name="grocery_list_id"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+</navigation>

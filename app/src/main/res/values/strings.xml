@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SwipeChef</string>
+    <string name="recipe_deck_title">My Recipes</string>
+    <string name="capture_recipe">Capture Recipe</string>
+    <string name="swipe_planning">Plan Meals</string>
+    <string name="recipe_detail">Recipe Details</string>
+    <string name="grocery_list">Grocery List</string>
+    <string name="share_recipe">Share Recipe</string>
+    <string name="add_recipe">Add Recipe</string>
+    <string name="edit_recipe">Edit Recipe</string>
+    <string name="delete_recipe">Delete Recipe</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="directions">Directions</string>
+    <string name="prep_time">Prep Time</string>
+    <string name="cook_time">Cook Time</string>
+    <string name="serves">Serves</string>
+    <string name="meal_type">Meal</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="generate_list">Generate List</string>
+    <string name="processing">Processing...</string>
+    <string name="error_occurred">An error occurred</string>
+</resources>
