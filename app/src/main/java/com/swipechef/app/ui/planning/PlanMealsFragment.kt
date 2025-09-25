@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.swipechef.app.data.SampleRecipes
 import com.swipechef.app.data.models.Recipe
 import com.swipechef.app.databinding.FragmentPlanMealsBinding
+import com.swipechef.app.ui.shared.SharedRecipeViewModel
 
 class PlanMealsFragment : Fragment() {
 
@@ -17,8 +20,10 @@ class PlanMealsFragment : Fragment() {
 
     private lateinit var recipesAdapter: RecipesSwipeAdapter
     private val allRecipes = SampleRecipes.getSampleRecipes()
-    private val chosenRecipes = mutableListOf<Recipe>()
     private var currentRecipeIndex = 0
+
+    // Shared ViewModel for chosen recipes
+    private val sharedViewModel: SharedRecipeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,14 +38,39 @@ class PlanMealsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecipeCards()
+        observeViewModel()
         updateCounter()
     }
 
-    private fun setupRecipeCards() {
-        recipesAdapter = RecipesSwipeAdapter(allRecipes) { recipe ->
-            // Handle recipe tap for detailed view
-            showRecipeDetails(recipe)
+    private fun observeViewModel() {
+        sharedViewModel.showAddedToast.observe(viewLifecycleOwner) { message ->
+            message?.let {
+                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                sharedViewModel.clearToastMessage()
+                updateCounter()
+            }
         }
+
+        sharedViewModel.chosenRecipes.observe(viewLifecycleOwner) {
+            updateCounter()
+        }
+    }
+
+    private fun addRecipeToChosen(recipe: Recipe) {
+        sharedViewModel.addRecipeToChosen(recipe)
+    }
+
+    private fun setupRecipeCards() {
+        recipesAdapter = RecipesSwipeAdapter(
+            recipes = allRecipes,
+            onRecipeClick = { recipe ->
+                // Handle recipe tap for detailed view
+                showRecipeDetails(recipe)
+            },
+            onRecipeSwipeUp = { recipe ->
+                addRecipeToChosen(recipe)
+            }
+        )
 
         binding.recipeViewPager.adapter = recipesAdapter
         binding.recipeViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -60,6 +90,10 @@ class PlanMealsFragment : Fragment() {
         }
 
         binding.btnChoose.setOnClickListener {
+            // Find the currently visible recipe card and animate it
+            val viewPager = binding.recipeViewPager
+            val currentFragment = recipesAdapter.getCurrentRecipeCard(viewPager)
+            currentFragment?.animateChooseButton()
             chooseCurrentRecipe()
         }
 
@@ -67,16 +101,12 @@ class PlanMealsFragment : Fragment() {
     }
 
     private fun skipCurrentRecipe() {
-        animateSkip()
         moveToNextRecipe()
     }
 
     private fun chooseCurrentRecipe() {
         val currentRecipe = allRecipes[currentRecipeIndex]
-        chosenRecipes.add(currentRecipe)
-
-        animateChoose()
-        updateCounter()
+        addRecipeToChosen(currentRecipe)
         moveToNextRecipe()
     }
 
@@ -89,22 +119,16 @@ class PlanMealsFragment : Fragment() {
         }
     }
 
-    private fun animateSkip() {
-        // Simple animation - could be enhanced with custom animations
-    }
-
-    private fun animateChoose() {
-        // Simple animation - could be enhanced with custom animations
-    }
 
     private fun showRecipeDetails(recipe: Recipe) {
+        Toast.makeText(requireContext(), "Recipe details for: ${recipe.title}", Toast.LENGTH_SHORT).show()
         // TODO: Navigate to recipe detail fragment
-        // For now, just show a toast or dialog
     }
 
     private fun updateCounter() {
-        binding.chosenCount.text = "${chosenRecipes.size} recipes chosen"
-        binding.btnViewChosen.visibility = if (chosenRecipes.isEmpty()) View.GONE else View.VISIBLE
+        val chosenCount = sharedViewModel.getChosenRecipesCount()
+        binding.chosenCount.text = "$chosenCount recipes chosen"
+        binding.btnViewChosen.visibility = if (chosenCount == 0) View.GONE else View.VISIBLE
 
         binding.btnViewChosen.setOnClickListener {
             // Navigate to chosen meals tab

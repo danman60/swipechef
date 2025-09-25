@@ -2,22 +2,37 @@ package com.swipechef.app.data.models
 
 import java.util.UUID
 
+// Enhanced Recipe model per TRD requirements
 data class Recipe(
     val id: String = UUID.randomUUID().toString(),
     val title: String,
     val description: String,
-    val ingredients: List<Ingredient>,
-    val steps: List<String>,
+    val sourceUrl: String? = null,
     val imageUrl: String? = null,
-    val sourceLink: String? = null,
+    val imageSource: ImageSource = ImageSource.PROVIDED,
+    val imageAttribution: String? = null,
+    val servings: Int? = null,
+    val totalTimeMins: Int? = null,
     val cookTime: Int? = null,
     val prepTime: Int? = null,
-    val servings: Int? = null,
-    val mealType: String = "Any",
     val tags: List<String> = emptyList(),
+
+    // Raw ingredient lines (as entered/imported)
+    val ingredients: List<Ingredient>,
+    val steps: List<String>,
+
+    // Normalized ingredients for grocery list
+    val parsedIngredients: List<ParsedIngredient>? = null,
+
+    // Metadata
+    val mealType: String = "Any",
     val ratings: RecipeRatings? = null,
-    val createdAt: Long = System.currentTimeMillis(),
-    val userId: String
+    val createdAt: String = System.currentTimeMillis().toString(),
+    val updatedAt: String = System.currentTimeMillis().toString(),
+    val userId: String,
+
+    // UI state
+    val isChosen: Boolean = false
 ) {
     fun getTotalTime(): Int? {
         return if (cookTime != null && prepTime != null) {

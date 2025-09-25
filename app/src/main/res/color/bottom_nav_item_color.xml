@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Selected state: White on dark background for WCAG AA contrast -->
+    <item android:color="@color/white" android:state_selected="true" />
+    <item android:color="@color/white" android:state_checked="true" />
+
+    <!-- Unselected state: 70% white for visibility -->
+    <item android:color="#B3FFFFFF" />
+</selector>

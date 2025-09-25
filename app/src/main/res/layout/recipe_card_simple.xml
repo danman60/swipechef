@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.swipechef.app.ui.views.SwipeableRecipeCard
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,6 +15,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- Pioneer Needles Card Header -->
+        <include
+            android:id="@+id/cardHeader"
+            layout="@layout/card_header_pioneer_needles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <!-- Recipe Image -->
         <ImageView
             android:id="@+id/recipeImage"
@@ -25,7 +32,7 @@
             android:contentDescription="Recipe image"
             tools:src="@color/gray_200" />
 
-        <!-- Recipe Info Overlay -->
+        <!-- Recipe Info Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,24 +40,11 @@
             android:padding="20dp"
             android:background="@color/white">
 
-            <!-- Recipe Title -->
-            <TextView
-                android:id="@+id/recipeTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_primary"
-                android:maxLines="2"
-                android:ellipsize="end"
-                tools:text="Spaghetti Carbonara" />
-
             <!-- Recipe Description -->
             <TextView
                 android:id="@+id/recipeDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:textSize="16sp"
                 android:textColor="@color/text_secondary"
                 android:maxLines="3"
@@ -157,4 +151,4 @@
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.swipechef.app.ui.views.SwipeableRecipeCard>

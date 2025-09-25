@@ -39,7 +39,7 @@ data class RecipeExtraction(
             ingredients = processedIngredients,
             steps = steps,
             imageUrl = imageUrl,
-            sourceLink = sourceUrl,
+            sourceUrl = sourceUrl,
             cookTime = cookTime,
             prepTime = prepTime,
             servings = servings,
