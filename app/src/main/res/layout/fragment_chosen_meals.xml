@@ -17,54 +17,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Grocery List"
+            android:text="Chosen Meals"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:gravity="center" />
 
         <TextView
-            android:id="@+id/completedCount"
+            android:id="@+id/recipeCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="0 of 0 completed"
+            android:text="0 recipes selected"
             android:textSize="14sp"
             android:textColor="@color/white"
             android:gravity="center"
             android:alpha="0.9" />
-
-    </LinearLayout>
-
-    <!-- Progress Stats -->
-    <LinearLayout
-        android:id="@+id/statsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:background="@color/white"
-        android:elevation="2dp"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Shopping Progress"
-            android:textSize="14sp"
-            android:textColor="@color/text_secondary"
-            android:layout_gravity="center_vertical" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="16dp"
-            android:layout_gravity="center_vertical"
-            android:progressTint="@color/swipe_accent"
-            android:max="100" />
 
     </LinearLayout>
 
@@ -74,14 +42,14 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- Grocery Items List -->
+        <!-- Chosen Recipes List -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewGrocery"
+            android:id="@+id/recyclerViewChosen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp"
             android:clipToPadding="false"
-            tools:listitem="@layout/item_grocery" />
+            tools:listitem="@layout/item_chosen_recipe" />
 
         <!-- Empty State -->
         <LinearLayout
@@ -96,14 +64,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🛒"
+                android:text="🍽️"
                 android:textSize="48sp"
                 android:layout_marginBottom="16dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No grocery list yet"
+                android:text="No meals chosen yet"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
@@ -113,7 +81,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Choose some recipes first, then your grocery list will appear here automatically!"
+                android:text="Go to Plan Meals and swipe right on recipes you like!"
                 android:textSize="16sp"
                 android:textColor="@color/text_secondary"
                 android:gravity="center"
@@ -122,5 +90,18 @@
         </LinearLayout>
 
     </FrameLayout>
+
+    <!-- Generate Grocery List Button -->
+    <Button
+        android:id="@+id/generateGroceryButton"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        android:text="Generate Grocery List"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/swipe_accent"
+        android:visibility="gone" />
 
 </LinearLayout>
