@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.recipeDeckFragment,
-                R.id.swipePlanningFragment,
+                R.id.planMealsFragment,
+                R.id.chosenMealsFragment,
                 R.id.groceryListFragment
             )
         )
@@ -57,22 +57,18 @@ class MainActivity : AppCompatActivity() {
     private fun handleSharedImage() {
         val imageUri = intent.getParcelableExtra<Uri>(Intent.EXTRA_STREAM)
         if (imageUri != null) {
-            // Navigate to recipe capture fragment with the shared image
-            val bundle = Bundle().apply {
-                putParcelable("shared_image_uri", imageUri)
-            }
-            navController.navigate(R.id.recipeCaptureFragment, bundle)
+            // TODO: Navigate to recipe capture when implemented
+            // For now, just navigate to plan meals
+            navController.navigate(R.id.planMealsFragment)
         }
     }
 
     private fun handleSharedImages() {
         val imageUris = intent.getParcelableArrayListExtra<Uri>(Intent.EXTRA_STREAM)
         if (!imageUris.isNullOrEmpty()) {
-            // For multiple images, handle the first one
-            val bundle = Bundle().apply {
-                putParcelable("shared_image_uri", imageUris.first())
-            }
-            navController.navigate(R.id.recipeCaptureFragment, bundle)
+            // TODO: Handle multiple images when recipe capture is implemented
+            // For now, just navigate to plan meals
+            navController.navigate(R.id.planMealsFragment)
         }
     }
 

@@ -3,6 +3,7 @@ package com.swipechef.app.ui.chosen
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.swipechef.app.data.SampleRecipes
 import com.swipechef.app.data.models.Recipe
 import com.swipechef.app.databinding.ItemChosenRecipeBinding
 
@@ -20,7 +21,7 @@ class ChosenMealsAdapter(
             binding.recipeDescription.text = recipe.description
             binding.cookTime.text = "${recipe.cookTime} min"
             binding.servings.text = "${recipe.servings} servings"
-            binding.difficulty.text = recipe.difficulty
+            binding.difficulty.text = SampleRecipes.getDifficulty(recipe)
             binding.ingredientCount.text = "${recipe.ingredients.size} ingredients"
 
             // TODO: Load image from URL

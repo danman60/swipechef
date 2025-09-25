@@ -1,16 +1,11 @@
 package com.swipechef.app.ui.planning
 
-import android.animation.AnimatorInflater
-import android.animation.AnimatorSet
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.swipechef.app.R
 import com.swipechef.app.data.SampleRecipes
 import com.swipechef.app.data.models.Recipe
 import com.swipechef.app.databinding.FragmentPlanMealsBinding
@@ -95,21 +90,11 @@ class PlanMealsFragment : Fragment() {
     }
 
     private fun animateSkip() {
-        val currentCard = binding.recipeViewPager.findViewById<View>(R.id.recipeCard)
-        currentCard?.let {
-            val animator = AnimatorInflater.loadAnimator(requireContext(), android.R.animator.slide_out_right) as AnimatorSet
-            animator.setTarget(it)
-            animator.start()
-        }
+        // Simple animation - could be enhanced with custom animations
     }
 
     private fun animateChoose() {
-        val currentCard = binding.recipeViewPager.findViewById<View>(R.id.recipeCard)
-        currentCard?.let {
-            val animator = AnimatorInflater.loadAnimator(requireContext(), android.R.animator.fade_in) as AnimatorSet
-            animator.setTarget(it)
-            animator.start()
-        }
+        // Simple animation - could be enhanced with custom animations
     }
 
     private fun showRecipeDetails(recipe: Recipe) {

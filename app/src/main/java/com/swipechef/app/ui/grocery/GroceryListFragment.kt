@@ -53,13 +53,13 @@ class GroceryListFragment : Fragment() {
         if (chosenRecipes.isEmpty()) return
 
         val allIngredients = chosenRecipes.flatMap { it.ingredients }
-        val generatedList = GroceryListGenerator.generateGroceryList(
-            "Weekly Meal Plan",
-            allIngredients
-        )
+        // Convert ingredients to grocery items
+        val generatedItems = allIngredients.map { ingredient ->
+            ingredient.toGroceryItem()
+        }
 
         groceryItems.clear()
-        groceryItems.addAll(generatedList.items)
+        groceryItems.addAll(generatedItems)
         groceryAdapter.notifyDataSetChanged()
 
         updateStats()
@@ -68,7 +68,7 @@ class GroceryListFragment : Fragment() {
     private fun toggleItemCompleted(item: GroceryItem) {
         val position = groceryItems.indexOf(item)
         if (position >= 0) {
-            groceryItems[position] = item.copy(isCompleted = !item.isCompleted)
+            groceryItems[position] = item.copy(completed = !item.completed)
             groceryAdapter.notifyItemChanged(position)
             updateStats()
         }
@@ -87,7 +87,7 @@ class GroceryListFragment : Fragment() {
     }
 
     private fun updateStats() {
-        val completedItems = groceryItems.count { it.isCompleted }
+        val completedItems = groceryItems.count { it.completed }
         val totalItems = groceryItems.size
 
         binding.completedCount.text = "$completedItems of $totalItems completed"

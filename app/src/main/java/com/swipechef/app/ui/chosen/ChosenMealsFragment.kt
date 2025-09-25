@@ -34,11 +34,11 @@ class ChosenMealsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        chosenMealsAdapter = ChosenMealsAdapter(chosenRecipes) { recipe ->
-            showRecipeDetails(recipe)
-        } { recipe ->
-            removeRecipe(recipe)
-        }
+        chosenMealsAdapter = ChosenMealsAdapter(
+            chosenRecipes,
+            onRecipeClick = { recipe -> showRecipeDetails(recipe) },
+            onRemoveClick = { recipe -> removeRecipe(recipe) }
+        )
 
         binding.recyclerViewChosen.apply {
             adapter = chosenMealsAdapter

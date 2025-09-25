@@ -18,11 +18,11 @@ class GroceryListAdapter(
             binding.itemName.text = item.name
             binding.itemQuantity.text = item.quantity
             binding.itemCategory.text = item.category
-            binding.checkbox.isChecked = item.isCompleted
+            binding.checkbox.isChecked = item.completed
 
             // Apply strike-through for completed items
-            binding.itemName.alpha = if (item.isCompleted) 0.6f else 1.0f
-            binding.itemQuantity.alpha = if (item.isCompleted) 0.6f else 1.0f
+            binding.itemName.alpha = if (item.completed) 0.6f else 1.0f
+            binding.itemQuantity.alpha = if (item.completed) 0.6f else 1.0f
 
             binding.checkbox.setOnClickListener {
                 onItemClick(item)
